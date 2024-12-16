@@ -128,33 +128,33 @@ hold on;
 margin(GG,{omega_plot_min,omega_plot_max});
 grid on; zoom on;
 hold on;
-patch(x_f,y_f, 'p', 'FaceAlpha', 0.1);
+patch(x_f,y_f, 'g', 'FaceAlpha', 0.1);
 
-legend_arg = ["A_d", "A_n", "\omega_{c_{min}}", "G(j\omega)", "Mf"];
+legend_arg = ["\omega_{c_{min}}", "A_n", "A_d", "G(j\omega)", "Mf"];
 legend(legend_arg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% PATCH E PLOT G DOMINIO TEMPO
-FF=GG/(1+GG);
-T_simulation = 2*T_a_5_star;
-LV = evalfr(WW*FF,0);
-
-[y_w,t_step] = step(FF,T_simulation);
-
-figure;
-plot(t_step,y_w,'g');
-hold on;grid on;
-
-% vincolo sovraelongazione
-patch([0,T_simulation,T_simulation,0],[LV*(1+S_star),LV*(1+S_star),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
-
-% vincolo tempo di assestamento all'5%
-patch([T_a_5_star,T_simulation,T_simulation,T_a_5_star],[LV*(1-0.05),LV*(1-0.05),0,0],'g','FaceAlpha',0.1,'EdgeAlpha',0.5);
-patch([T_a_5_star,T_simulation,T_simulation,T_a_5_star],[LV*(1+0.05),LV*(1+0.05),LV*2,LV*2],'g','FaceAlpha',0.1,'EdgeAlpha',0.1);
-
-legend_arg = ["y_w(t)", "S%", "T_{a,5%}"];
-legend(legend_arg);
+% FF=GG/(1+GG);
+% T_simulation = 2*T_a_5_star;
+% LV = evalfr(WW*FF,0);
+% 
+% [y_w,t_step] = step(FF,T_simulation);
+% 
+% figure;
+% plot(t_step,y_w,'g');
+% hold on;grid on;
+% 
+% % vincolo sovraelongazione
+% patch([0,T_simulation,T_simulation,0],[LV*(1+S_star),LV*(1+S_star),LV*2,LV*2],'r','FaceAlpha',0.3,'EdgeAlpha',0.5);
+% 
+% % vincolo tempo di assestamento all'5%
+% patch([T_a_5_star,T_simulation,T_simulation,T_a_5_star],[LV*(1-0.05),LV*(1-0.05),0,0],'g','FaceAlpha',0.1,'EdgeAlpha',0.5);
+% patch([T_a_5_star,T_simulation,T_simulation,T_a_5_star],[LV*(1+0.05),LV*(1+0.05),LV*2,LV*2],'g','FaceAlpha',0.1,'EdgeAlpha',0.1);
+% 
+% legend_arg = ["y_w(t)", "S%", "T_{a,5%}"];
+% legend(legend_arg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -181,9 +181,9 @@ hold on;
 margin(GG_e,{omega_plot_min,omega_plot_max});
 grid on; zoom on;
 hold on;
-patch(x_f,y_f, 'p', 'FaceAlpha', 0.1);
+patch(x_f,y_f, 'g', 'FaceAlpha', 0.1);
 
-legend_arg = ["A_d", "A_n", "\omega_{c_{min}}", "G_e(j\omega)", "Mf"];
+legend_arg = ["\omega_{c_{min}}", "A_n", "A_d", "G_e(j\omega)", "Mf"];
 legend(legend_arg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -208,6 +208,7 @@ if min(tau,alpha) < 0
 end
 %R_high_frequency = 1/(1 + s/5e4); % per robustezza nell'attenuazione del disturbo di misura preferiamo inserire un polo ad alte frequenze e abbattere maggiormente
 RR_d = (1 + tau*s)/(1 + alpha * tau*s);%*R_high_frequency; % regolatore dinamico
+RR = RR_s*RR_d;
 LL = RR_d * GG_e; % funzione d'anello finale
 
 figure;
@@ -220,9 +221,9 @@ hold on;
 margin(LL,{omega_plot_min,omega_plot_max});
 grid on; zoom on;
 hold on;
-patch(x_f,y_f, 'p', 'FaceAlpha', 0.1);
+patch(x_f,y_f, 'g', 'FaceAlpha', 0.1);
 
-legend_arg = ["A_d", "A_n", "\omega_{c_{min}}", "L(j\omega)", "Mf"];
+legend_arg = ["\omega_{c_{min}}", "A_n", "A_d", "L(j\omega)", "Mf"];
 legend(legend_arg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
